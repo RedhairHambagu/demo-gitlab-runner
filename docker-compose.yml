@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  web:
+    build: .
+    ports:
+      - "${HOST_PORT:-18000}:18000"
+    # 健康检查（可选，CI 中可用 curl 替代）
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:18000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
